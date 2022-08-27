@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">WikiJedi</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="menu_option_one">Home</string>
+    <string name="menu_option_two">Search</string>
+    <string name="menu_option_three">Categories</string>
+    <string name="menu_option_four">Profile</string>
+    <string name="text_search">Search</string>
+    <string name="text_profile">Profile</string>
+    <string name="text_categories">Categories</string>
+    <string name="text_content_description">Icon</string>
+</resources>
