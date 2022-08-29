@@ -13,6 +13,7 @@ import acme.app.jediguide.model.usercase.StarWarsItemsUserCase
 import android.widget.TextView
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.squareup.picasso.Picasso
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -28,19 +29,24 @@ class ItemDetailFragment : Fragment() {
     }
 
     override fun onCreateView(
+
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+
         binding = FragmentItemDetailBinding.inflate(layoutInflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         initFragment()
     }
 
     private fun initFragment() {
+
+
         if(arguments != null) {
             val url = requireArguments().getString("baseUrl") ?: ""
             lifecycleScope.launch(Dispatchers.Main) {
@@ -48,8 +54,13 @@ class ItemDetailFragment : Fragment() {
                     StarWarsItemsUserCase().getFullAnimeItem(url)
                 }
                 binding.tvTitle.text = item.name
+                Picasso.get().load(item.url).into(binding.ivPersonaje)
+                binding.tvGender.text = item.gender
+                binding.tvAltura.text = item.height
+                binding.tvCumpleaOs.text = item.birth_year
             }
         }
+
     }
 
 

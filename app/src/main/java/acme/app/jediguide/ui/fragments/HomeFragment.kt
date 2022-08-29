@@ -15,6 +15,7 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.coroutines.Dispatchers
@@ -27,7 +28,6 @@ import java.security.Signature
 class HomeFragment(val handlerFragment: HandlerFragments) : Fragment() {
 
     private var page: Int = 1
-
     private lateinit var binding: FragmentHomeBinding
     private val adapterRv = StarWarsItemAdapter { managedClickItem(it) }
 
@@ -35,7 +35,7 @@ class HomeFragment(val handlerFragment: HandlerFragments) : Fragment() {
 
     private fun managedClickItem(item: StarWarsItem) {
         val bundle = Bundle()
-        val url = item.url.substring(29, item.url.length - 1)
+        val url = item.name
         bundle.putString("baseUrl",url)
         val listBundle: List<Bundle> = listOf(bundle)
         handlerFragment.replaceFragment(ItemDetailFragment(), R.id.fragment_content,listBundle, "back")
@@ -81,14 +81,18 @@ class HomeFragment(val handlerFragment: HandlerFragments) : Fragment() {
 
     private fun initFragment() {
         lifecycleScope.launch(Dispatchers.Main) {
+            binding.shimmerLayout.root.visibility = View.VISIBLE
             val listItems = withContext(Dispatchers.IO) {
                 StarWarsItemsUserCase().getAllAnimeItems(page)
             }
             adapterRv.dataList = listItems
-            binding.listRV.layoutManager = LinearLayoutManager(activity?.baseContext,
+            val manager = GridLayoutManager(this@HomeFragment.context, 2)
+            /* binding.listRV.layoutManager = LinearLayoutManager(activity?.baseContext,
                 LinearLayoutManager.VERTICAL,
-                false)
+                false) */
+            binding.listRV.layoutManager = manager
             binding.listRV.adapter = adapterRv
+            binding.shimmerLayout.root.visibility = View.GONE
 
 
         }

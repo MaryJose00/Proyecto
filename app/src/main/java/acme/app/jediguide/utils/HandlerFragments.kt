@@ -7,6 +7,8 @@ import androidx.fragment.app.FragmentManager
 
 class HandlerFragments(val handler: FragmentManager) {
 
+    private val SHIMMER_TAG = "shimmer"
+
     /*Function gor replace a Fragment */
     fun replaceFragment(
         fragment: Fragment, idFrameLayout: Int,
@@ -18,12 +20,20 @@ class HandlerFragments(val handler: FragmentManager) {
                 fragment.arguments = bundle
             }
 
+
             if (!tag.isNullOrEmpty()) {
                 this.addToBackStack(null)
             }
             /*Replace Fragment*/
             this.replace(idFrameLayout,fragment,tag)
             this.commit()
+        }
+    }
+
+    fun RemoveFragment(tag: String) {
+        val fragment = handler.findFragmentByTag(tag)
+        if (fragment != null) {
+            handler.beginTransaction().remove(fragment).commit()
         }
     }
 

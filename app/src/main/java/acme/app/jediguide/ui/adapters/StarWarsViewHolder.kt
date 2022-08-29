@@ -16,8 +16,8 @@ class StarWarsViewHolder(item: View): RecyclerView.ViewHolder(item) {
     fun render(starWarsItem: StarWarsItem, itemClick: (StarWarsItem) -> Unit) {
         Picasso.get().load(starWarsItem.image).into(binding.ivHero)
         binding.tvName.text = starWarsItem.name
-        binding.tvRealName.text = starWarsItem.url
-        binding.tvPublisher.text = starWarsItem.gender
+        //binding.tvRealName.text = starWarsItem.url
+        //binding.tvPublisher.text = starWarsItem.gender
         itemView.setOnClickListener() {
             itemClick(starWarsItem)
         }

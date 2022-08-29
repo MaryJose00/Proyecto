@@ -12,5 +12,12 @@ class ApiRepository {
             .build()
     }
 
+    fun getRetrofit2(): Retrofit {
+        return Retrofit.Builder()
+            .baseUrl("https://acme-api-jedi.herokuapp.com/")
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+    }
+
 
 }

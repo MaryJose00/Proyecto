@@ -5,7 +5,7 @@
     <string name="menu_option_two">Search</string>
     <string name="menu_option_three">Categories</string>
     <string name="menu_option_four">Profile</string>
-    <string name="text_search">Search</string>
+    <string name="text_search">Aquí aparecera tu item</string>
     <string name="text_profile">Profile</string>
     <string name="text_categories">Categories</string>
     <string name="text_content_description">Icon</string>

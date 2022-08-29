@@ -15,6 +15,7 @@
     </style>
 
     <style name="Theme.Jediguide.NoActionBar">
+        <item name="android:navigationBarColor">#B2C1CD</item>
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
