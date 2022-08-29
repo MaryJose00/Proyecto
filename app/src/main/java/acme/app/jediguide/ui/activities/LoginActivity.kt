@@ -6,19 +6,20 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.appcompat.app.AlertDialog
 import com.google.firebase.auth.FirebaseAuth
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+
 
 class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLogin2Binding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         binding = ActivityLogin2Binding.inflate(layoutInflater)
         setContentView(binding.root)
-
         binding.loginButton.setOnClickListener(){
             login()
         }
-
     }
     private fun login(){
         binding.loginButton.setOnClickListener{

@@ -80,4 +80,26 @@ dependencies {
     // Autenticacion  FireBase
     implementation 'com.google.firebase:firebase-auth-ktx'
 
+    // Splash
+    implementation 'androidx.core:core-splashscreen:1.0.0'
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
