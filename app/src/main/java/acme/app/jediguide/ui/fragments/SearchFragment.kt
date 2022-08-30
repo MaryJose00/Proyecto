@@ -10,7 +10,16 @@ import acme.app.jediguide.databinding.FragmentItemDetailBinding
 import acme.app.jediguide.databinding.FragmentSearchBinding
 import acme.app.jediguide.model.entities.StarWarsItemModel
 import acme.app.jediguide.model.usercase.StarWarsItemsUserCase
+import acme.app.jediguide.ui.activities.MainActivity
+import acme.app.jediguide.utils.HandlerFragments
+import android.annotation.SuppressLint
+import android.content.Context.INPUT_METHOD_SERVICE
+import android.inputmethodservice.InputMethodService
+import android.view.inputmethod.InputMethodManager
+import androidx.annotation.MainThread
 import androidx.appcompat.widget.SearchView
+import androidx.appcompat.widget.SearchView.OnQueryTextListener
+import androidx.core.content.ContextCompat.getSystemService
 import androidx.lifecycle.lifecycleScope
 import com.squareup.picasso.Picasso
 import kotlinx.coroutines.CoroutineScope
@@ -20,9 +29,10 @@ import kotlinx.coroutines.withContext
 import retrofit2.Response
 
 
-class SearchFragment : Fragment() , SearchView.OnQueryTextListener{
+class SearchFragment(val handlerFragment: HandlerFragments) : Fragment(), SearchView.OnQueryTextListener {
 
     private lateinit var binding: FragmentSearchBinding
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,37 +44,21 @@ class SearchFragment : Fragment() , SearchView.OnQueryTextListener{
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentSearchBinding.inflate(layoutInflater, container, false)
-        //binding.search.setOnQueryTextListener(this)
+        binding.search.setOnQueryTextListener(this)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         initFragment()
     }
 
     private fun initFragment() {
-/*
-
-        if(arguments != null) {
-            val url = requireArguments().getString("baseUrl") ?: ""
-            lifecycleScope.launch(Dispatchers.Main) {
-                val item: StarWarsItemModel = withContext(Dispatchers.IO) {
-                    StarWarsItemsUserCase().getFullAnimeItem()
-                }
-                binding.tvTitle.text = item.name
-                Picasso.get().load(item.url).into(binding.ivPersonaje)
-                binding.tvGender.text = item.gender
-                binding.tvAltura.text = item.height
-                binding.tvCumpleaOs.text = item.birth_year
-            }
-        }*/
     }
 
-    override fun onQueryTextSubmit(query: String?): Boolean {
+   override fun onQueryTextSubmit(query: String?): Boolean {
         if(!query.isNullOrEmpty()) {
-            //searchByName(query.lowercase())
+            searchByName(query)
         }
         return true
 
@@ -74,25 +68,17 @@ class SearchFragment : Fragment() , SearchView.OnQueryTextListener{
         return true
     }
 
-    /*
+
     private fun searchByName(query: String) {
         CoroutineScope(Dispatchers.IO).launch {
-            val call: Response<DogsResponse> = getRetrofit().create(ApiService::class.java).getDogsByBreeds("$query/images")
-            val puppies = call.body()
-            runOnUiThread() {
-                if(call.isSuccessful) {
-                    //show recycle view
-                    val images = puppies?.images?: emptyList()
-                    dogImages.clear()
-                    dogImages.addAll(images)
-                    adapter.notifyDataSetChanged()
-                } else {
-                    //show error
-
-                }
-            }
+            val bundle = Bundle()
+            val url = query
+            bundle.putString("baseUrl",url)
+            val listBundle: List<Bundle> = listOf(bundle)
+            handlerFragment.replaceFragment(ItemDetailFragment(), R.id.fragment_search, listBundle, "back")
         }
+    }
 
-    }*/
+
 
 }

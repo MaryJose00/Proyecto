@@ -8,9 +8,11 @@ import acme.app.jediguide.ui.fragments.HomeFragment
 import acme.app.jediguide.ui.fragments.ProfileFragment
 import acme.app.jediguide.ui.fragments.SearchFragment
 import acme.app.jediguide.utils.HandlerFragments
+import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
+import com.google.android.material.elevation.SurfaceColors
 
 class MainActivity : AppCompatActivity() {
 
@@ -20,6 +22,7 @@ class MainActivity : AppCompatActivity() {
     /* Manager Fragment */
     private val fragment = HandlerFragments(supportFragmentManager)
 
+    @SuppressLint("ResourceAsColor")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -32,7 +35,7 @@ class MainActivity : AppCompatActivity() {
                 }
                 R.id.search -> {
                     fragment.replaceFragment(
-                        SearchFragment(),
+                        SearchFragment(fragment),
                         binding.fragmentContent.id,
                         null,
                         null

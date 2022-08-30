@@ -7,18 +7,23 @@
     tools:context=".ui.fragments.SearchFragment">
 
 
-    <SearchView
+    <androidx.appcompat.widget.SearchView
         android:id="@+id/search"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="#CCB491"
+        android:contentDescription="Buscar"
+        android:tooltipText="Buscar"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.076"
+        app:queryHint="C-3PO" />
 
     <FrameLayout
-        android:id="@+id/fragment_content"
-        android:layout_width="357dp"
-        android:layout_height="549dp"
-
+        android:id="@+id/fragment_search"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
